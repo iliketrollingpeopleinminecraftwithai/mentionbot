@@ -2,38 +2,31 @@ name: build-mod
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Java 21
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: 21
 
-      - name: Cache Gradle files
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            gradle-${{ runner.os }}-
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
-      - name: Grant execute permission to gradlew
-        run: chmod +x gradlew
-
-      - name: Build with Gradle
+      - name: Build mod
         run: ./gradlew build
-        env:
-          JAVA_TOOL_OPTIONS: -Xmx4G
+
+      - name: Upload mod jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: mentionbot-mod
+          path: build/libs/*.jar
