@@ -11,35 +11,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: ☕ Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      - name: Make gradlew executable
-        run: chmod +x ./mentionbot-main/gradlew
+      - name: 🔓 Make gradlew executable
+        run: chmod +x ./gradlew
 
-      - name: Build the mod (with verbose)
-        run: |
-          cd mentionbot-main
-          ./gradlew build --stacktrace --info
+      - name: 🛠️ Run Gradle Build
+        run: ./gradlew build
 
-      - name: Check what's inside the build folder
+      - name: 📂 Debug: List Build Output
         run: |
-          cd mentionbot-main
           if [ -d build ]; then
             echo "✅ Build folder found! Contents:"
             ls -R build
           else
-            echo "❌ No build folder found!"
+            echo "❌ Build folder NOT found!"
             exit 1
           fi
 
-      - name: Upload mod jar
+      - name: 📦 Upload Mod JAR
         uses: actions/upload-artifact@v4
         with:
           name: mentionbot-mod
-          path: mentionbot-main/build/libs/*.jar
+          path: build/libs/*.jar
