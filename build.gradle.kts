@@ -18,7 +18,7 @@ dependencies {
     minecraft("com.mojang:minecraft:1.21.5")
     mappings("net.fabricmc:yarn:1.21.5+build.1:v2")
     modImplementation("net.fabricmc:fabric-loader:0.14.9")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:0.77.0+1.21.5")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:0.124.0+1.21.5")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.google.code.gson:gson:2.10.1")
 }
