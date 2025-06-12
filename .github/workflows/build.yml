@@ -19,11 +19,20 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+      - name: Make gradlew executable (if it exists)
+        run: |
+          if [ -f ./gradlew ]; then
+            chmod +x ./gradlew
+          else
+            echo "gradlew not found!"
+            exit 1
+          fi
 
-      - name: Build mod
+      - name: Build the mod
         run: ./gradlew build
+
+      - name: Show what's inside build/
+        run: ls -R build
 
       - name: Upload mod jar
         uses: actions/upload-artifact@v4
