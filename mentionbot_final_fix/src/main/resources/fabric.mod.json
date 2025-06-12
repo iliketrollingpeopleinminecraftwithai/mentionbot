@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "mentionbot",
+  "version": "1.0.0",
+  "name": "Mention Bot",
+  "description": "Replies using Ollama AI when someone mentions @Nul1_YT",
+  "authors": ["YourName"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.mentionbot.MentionBotMod"]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric": "*",
+    "minecraft": "1.21.5"
+  }
+}
