@@ -20,13 +20,16 @@ jobs:
           java-version: 21
 
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: chmod +x ./mentionbot-main/gradlew
 
       - name: Build the mod (with verbose)
-        run: ./gradlew build --stacktrace --info
+        run: |
+          cd mentionbot-main
+          ./gradlew build --stacktrace --info
 
       - name: Check what's inside the build folder
         run: |
+          cd mentionbot-main
           if [ -d build ]; then
             echo "✅ Build folder found! Contents:"
             ls -R build
@@ -39,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mentionbot-mod
-          path: build/libs/*.jar
+          path: mentionbot-main/build/libs/*.jar
