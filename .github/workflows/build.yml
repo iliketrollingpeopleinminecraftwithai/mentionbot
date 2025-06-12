@@ -11,32 +11,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🧾 Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: ☕ Set up JDK 21
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      - name: 🔓 Make gradlew executable
+      - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: 🛠️ Run Gradle Build
+      - name: Run build
         run: ./gradlew build
 
-      - name: 📂 Debug: List Build Output
+      - name: Check build directory
         run: |
           if [ -d build ]; then
             echo "✅ Build folder found! Contents:"
             ls -R build
           else
-            echo "❌ Build folder NOT found!"
+            echo "❌ No build folder found!"
             exit 1
           fi
 
-      - name: 📦 Upload Mod JAR
+      - name: Upload mod jar
         uses: actions/upload-artifact@v4
         with:
           name: mentionbot-mod
