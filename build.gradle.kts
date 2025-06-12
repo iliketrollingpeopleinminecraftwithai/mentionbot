@@ -4,7 +4,9 @@ plugins {
 
 group = "com.mentionbot"
 version = "1.0.0"
-archivesBaseName = "mention-bot"
+tasks.withType<Jar> {
+    archiveBaseName.set("mention-bot")
+}
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
 repositories {
